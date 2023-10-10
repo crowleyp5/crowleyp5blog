@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Optimize Hyperparameters"
 author: Paul Crowley
-description: A basic tutorial for optimizing hyperparameters of machine learning models.
+description: "A basic tutorial for optimizing hyperparameters of machine learning models."
 image: /assets/images/photo-1696946775093-96fcbd47213a.jpg
 ---
 In the context of machine learning, hyperparameters are predefined input values for a model. They are not derived from the data. For example, the number of decision trees in a random forest and the learning rate of a regression model are hyperparameters. The values of these hyperparameters can significantly impact a model's predictive performance. Perhaps with some experience, we could essentially eyeball the context and make a fairly accurate guess as to what the optimal values would be for the hyperparameters in question. Alternatively, we can get a more precise estimate of the optimal hyperparameter if we test multiple candidate values and compare their performance.
