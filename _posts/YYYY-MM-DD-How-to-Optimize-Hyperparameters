@@ -5,17 +5,11 @@ author: Paul Crowley
 description: A basic tutorial for optimizing hyperparameters of machine learning models.
 image: /assets/images/blog-image.jpg
 ---
-In the context of machine learning, hyperparameters are predefined input values for a model. They are not derived from the data.
-For example, the number of decision trees in a random forest and the learning rate of a regression model are hyperparameters.
-The values of these hyperparameters can significantly impact a model's predictive performance. Perhaps with some experience, we
-could essentially eyeball the context and make a fairly accurate guess as to what the optimal values would be for the hyperparameters
-in question. Alternatively, we can get a more precise estimate of the optimal hyperparameter if we test multiple candidate values and
-compare their performance.
+In the context of machine learning, hyperparameters are predefined input values for a model. They are not derived from the data. For example, the number of decision trees in a random forest and the learning rate of a regression model are hyperparameters. The values of these hyperparameters can significantly impact a model's predictive performance. Perhaps with some experience, we could essentially eyeball the context and make a fairly accurate guess as to what the optimal values would be for the hyperparameters in question. Alternatively, we can get a more precise estimate of the optimal hyperparameter if we test multiple candidate values and compare their performance.
 
-My first exposure to this practice came from the house prices competition on Kaggle. I will use the data provided from this
-competition to demonstrate hyperparameter optimization techniques. Below is some code for preprocessing the data, although this is
-not the focus of this tutorial.
+My first exposure to this practice came from the house prices competition on Kaggle. I will use the data provided from this competition to demonstrate hyperparameter optimization techniques. Below is some code for preprocessing the data, although this is not the focus of this tutorial.
 
+```python
 import numpy as np
 import pandas as pd
 
@@ -25,8 +19,7 @@ houses = pd.read_csv('train.csv')
 train = pd.read_csv('train.csv')
 test = pd.read_csv('test.csv')
 
-# Store the test Ids because they need to be dropped before training but still
-# needed for the submission file
+# Store the test Ids because they need to be dropped before training but still needed for the submission file
 test_ids = test['Id']
 
 # Drop utilities and street because nearly all observations are the same value.
@@ -44,13 +37,11 @@ features = pd.concat([train_features, test_features]).reset_index(drop=True)
 numeric_cols = features.select_dtypes(exclude=['object']).columns
 numeric_cols = numeric_cols.difference(['MSSubClass', 'MoSold', 'YrSold'])
 
-# Assume that the missing values here are because the house does not have a garage,
-# basement, etc. Replace them with 0.
+# Assume that the missing values here are because the house does not have a garage, basement, etc. Replace them with 0.
 for col in ('MasVnrArea', 'GarageYrBlt', 'GarageArea', 'GarageCars', 'MiscVal'):
     features[col] = features[col].fillna(0)
 
-# Due to the skewness of the data, replace the rest of the missing numeric
-# data with the median instead of the mean.
+# Due to the skewness of the data, replace the rest of the missing numeric data with the median instead of the mean.
 for col in numeric_cols:
     features[col].fillna(features[col].median(), inplace=True)
 
@@ -63,26 +54,24 @@ for col in numeric_cols:
     if not np.all(np.isfinite(features[col])):  # Check for non-finite values
         features[col] = np.log1p(features[col] - features[col].min() + 1)
 
-# Select categorical columns by data type, then add MSSubClass, MoSold, and
-# YrSold. These are categorical variables represented in the data as numbers.
+# Select categorical columns by data type, then add MSSubClass, MoSold, and YrSold. These are categorical variables represented in the data as numbers.
 categorical_cols = features.select_dtypes(include=['object']).columns
 categorical_cols = categorical_cols.union(['MSSubClass', 'MoSold', 'YrSold'])
 
-# These features are often missing if the house does not have a garage,
-# basement, etc. We replace missing values with "None".
+# These features are often missing if the house does not have a garage, basement, etc. We replace missing values with "None".
 for col in ['GarageType', 'GarageFinish', 'GarageQual', 'GarageCond',
             'FireplaceQu', 'Alley', 'BsmtQual', 'BsmtCond', 'BsmtExposure',
             'BsmtFinType1', 'BsmtFinType2', 'Fence', 'MiscFeature',
             'MasVnrType']:
     features[col] = features[col].fillna('None')
 
-# It does not make sense to replace the other missing values with "None", so we
-# replace them with the mode.
+# It does not make sense to replace the other missing values with "None", so we replace them with the mode.
 for col in categorical_cols:
     features[col].fillna(features[col].mode()[0], inplace=True)
 
 # Create dummy variables for categorical features
 features = pd.get_dummies(features, columns=categorical_cols)
+```
 
 Now that we have the data ready to work with, we can initialize a model of our choice. One model I used in my
 analysis was the Lasso regression model. This model helps with feature selection by setting the some of
@@ -95,6 +84,7 @@ However, we can define a range of candidate values and test the models accuracy 
 perform cross validation to iteratively evaluate the models performance at each value as measured by the
 mean squared error and use the best performing hyperparameter in our final model.
 
+```python
 from sklearn.linear_model import Lasso
 from sklearn.model_selection import train_test_split, GridSearchCV
 
@@ -123,6 +113,7 @@ print(best_alpha)
 
 # Initialize a Lasso regression model with the best alpha value
 best_lasso = Lasso(alpha=best_alpha)
+```
 
 Running the code above will yield a best regularization parameter of 0.0005. I knew this
 before writing this post, which is why I defined the range as I did. You will notice that
@@ -131,6 +122,7 @@ unsure about what order of magnitude is appropriate for the parameter, it would 
 those orders of magnitude and then test a range of values from the optimal order of magnitude.
 We can accomplish this easily with the Numpy logspace and linspace functions.
 
+```python
 # Redefine paramater grid for order of magnitude
 param_grid = {'alpha': np.logspace(-4, -1, 4)}
 print(param_grid)
@@ -165,6 +157,7 @@ grid_search.fit(X_train, y_train)
 # Get the best alpha value from the grid search
 best_alpha = grid_search.best_params_['alpha']
 print(best_alpha)
+```
 
 The output here is {'alpha': array([0.0001, 0.001 , 0.01  , 0.1   ])} with best_alpha equaling 0.001 for the logspace
 interval and {'alpha': array([0.0005 , 0.00125, 0.002  , 0.00275, 0.0035 , 0.00425, 0.005  ])} with best_alpha equaling
