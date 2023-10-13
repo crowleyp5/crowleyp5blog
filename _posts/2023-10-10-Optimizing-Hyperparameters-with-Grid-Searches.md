@@ -5,10 +5,10 @@ author: Paul Crowley
 description: "A basic tutorial for optimizing hyperparameters of machine learning models."
 image: /assets/images/photo-1696946775093-96fcbd47213a.jpg
 ---
-## What are Hyperparameters?
+### What are Hyperparameters?
 In the context of machine learning, hyperparameters are predefined input values used in a model's calculations. They are not derived from the data. For example, the number of decision trees in a random forest and the learning rate to be used in a gradient descent algorithm are hyperparameters. Before we start training a model, we have to provide the necessary hyperparameters. The values of these hyperparameters can significantly impact a model's predictive performance, and while we may not know intuitively what the optimal number of decision trees are for a given random forest model, we can use a hyperparameter optimization technique called a grid search to find the best values that lead to the most accurate predictions.
 
-## Choose a Model
+### Choose a Model
 We can assume that we already have a preprocessed data set that we would like to analyze with a machine learning model. We must first decide on a machine learning model. For this demonstration, I have selected a lasso regression model. You can learn more about lasso [here](https://en.wikipedia.org/wiki/Lasso_(statistics)). In short, this is a regression model that simultaneously performs feature selection based on a hyperparameter.
 ```python
 from sklearn.linear_model import Lasso
