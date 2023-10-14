@@ -24,6 +24,8 @@ The hyperparameter that dictates feature selection is called the regularization 
 ## Define a Grid Based on Order of Magnitude
 A grid is essentially a dictionary of parameters. Our dictionary will be simple because we only have one hyperparameter of interest, but there could be more. Each parameter is associated with a range of hyperparameter values for which we want to compare the model's performance. How do we know which values to test? There could be a big difference bewteen a regularization strengths of 0.1 and 0.0001. Both could be reasonable depending on the problem, but there are orders of magnitude difference between them. Testing too many values can be computationally expensive, so we can first test orders of magnitude to narrow down our search. We can use Numpy's logspace function to generate this array of values by order of magnitude, and then we define the grid.
 ```python
+import numpy
+
 # Define a range of regularization strength values to search
 alpha_values = np.logspace(-4, -1, 4)
 
@@ -53,7 +55,7 @@ print(best_alpha)
 ```
 
 ## Repeat at Same Order of Magnitude
-However, we only tested to find the ideal order of magnitude. We need to repeat the process around that order of magnitude to find the most optimal value. we can use Numpy's linspace function to generate a range of values around the identified order of magnitude.
+However, we only tested to find the ideal order of magnitude. We need to repeat the process around that order of magnitude to find the most optimal value. We can use Numpy's linspace function to generate a range of values around the identified order of magnitude.
 ```python
 # Define new range and grid
 alpha_values = np.linspace(best_alpha-0.0005, best_alpha+0.0005, 7)
