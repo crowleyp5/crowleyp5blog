@@ -3,68 +3,22 @@ layout: post
 title:  "Collecting Data To Analyze Red Side vs. Blue Side in Professional League of Legends"
 author: Paul Crowley
 description: "Scraping and cleaning publicly available data for comparisons in playstyle across both sides."
-image: /assets/images/photo-1696946775093-96fcbd47213a.jpg
+image: /assets/images/red_blue.jpg
 ---
 ### For Those Unfamiliar with League of Legends
-League of Legends is easily one of the most popular online games played on PC. It has a large casual following and a very large professional scene worldwide. It is a strategic, team-based game with 5 players on each team. The game is played on a symmetric map with three lanes and jungle inbetween them. Although the map is symmetric, the players are mirrored, so the two sides of the map (referred to as red side and blue side) are not equal.
+League of Legends is easily one of the most popular online games played on PC. It has a large casual following and a very large professional scene worldwide. It is a strategic, team-based game with 5 players on each team. The game is played on a symmetric map with three lanes and jungle inbetween them. Although the map is symmetric, the players are mirrored, so the two sides of the map (referred to as red side and blue side) are not equal. Due to the complexity of the game and time it would take to explain everything, I will not be giving much more details than this.
 
-### Motivation and Purpose
-Every year, there is a worldwide tournament where the best professional teams from across the world are invitied to compete to become the best team in the world. This tournament started again last month, and I have been following along. Although League of Legends players and analysts know that the blue side has a slightly higher win rate (55%) than the red side, not much analysis is done to explain why. I wanted to find data that would help examine differences in playstyles. League of Legends is a game of trades.
-## Identify Hyperparameters of Interest
-The hyperparameter that dictates feature selection is called the regularization strength. If the regularization strength is too large, then we may be excluding important predictor variables in our model. If it is too small, then we could be including variables with negligible predictive capacity that essentially complicate our model with noise. We will use hyperparameter optimization techniques to avoid both problems.
+### Motivation, Purpose, and Research Question
+Every year, there is a worldwide tournament where the best professional teams from across the world are invitied to compete to become the best team in the world. This tournament started again last month, and I have been following along. Although League of Legends players and analysts know that the blue side has a slightly higher win rate (55%) than the red side, not much analysis is done to explain why. I wanted to find data that would help examine differences in playstyles. How do playstyles differ from red side and blue side?
 
-## Define a Grid Based on Order of Magnitude
-A grid is essentially a dictionary of parameters. Our dictionary will be simple because we only have one hyperparameter of interest, but there could be more. Each parameter is associated with a range of hyperparameter values for which we want to compare the model's performance. How do we know which values to test? There could be a big difference bewteen a regularization strengths of 0.1 and 0.0001. Both could be reasonable depending on the problem, but there are orders of magnitude difference between them. Testing too many values can be computationally expensive, so we can first test orders of magnitude to narrow down our search. We can use Numpy's logspace function to generate this array of values by order of magnitude, and then we define the grid.
-```python
-import numpy
+## Scraping the Data
+Data was scraped from the Games of Legends site, which posts game statistics from leagues around the world. Scraping the data took a considerable amount of time due to how frequently it had to navigate to a new page, so I would not recommend scraping your own data set unless you have the passion and patience like I did. The format of this site is a table with 10 of the most recent professional sets of League of Legends. There is a back button to show the previous 10 sets that does not redirect to a new page. In the row corresponding to each set, there is a link that redirects us to a stats page where I scraped most of the info. Since this redirects to a new page with the game stats, it nagivates back to the home page, and it has to push the previous 10 button again to get back to the set being analyzed. Thus, it had to keep track of the back count. Each set has anywhere from 1 to 5 games. It is important to note that some games did not have the required stats, so the program throws errors. At first, I tried to filter the offending tournaments out, but this was not feasible because of how many there were. If the program throws errors, I simply adjusted the back button count and started the program again.
 
-# Define a range of regularization strength values to search
-alpha_values = np.logspace(-4, -1, 4)
+## Cleaning the Data
+The data was fairly clean to begin with, but there were a few steps necessary to make the data usable. The program scraped duplicate games because of insufficient sleep times and inconsistent load times. It probably would have been more efficient to use expected condition statements instead of manually putting the program to sleep. After removing duplicate rows, there were 509 game observations in the data set. I converted the times that were formatted in minutes and seconds to just minutes with decimals, which simplified the units for numeric comparisons. I converted the date to datetime format. There were some extra commas in the KDA and CS column, which I removed. I then split the strings by commas in that column and in the picks and bans columns to create separate columns for eaach KDA, CS, pick, and ban. The KDA, CS, and picks were in order of roles of top, jungle, mid, bot, and support, so ther columns are labeled as such on each side. The bans are labeled from one to five on each side. The other columns were already formatted properly.
 
-Create a parameter grid
-param_grid = {'alpha': alpha_values}
-```
-
-## Perform Grid Search
-Now that we have a parameter grid, we can iteratively test every possible combination of values for our hyperparameters. Since we only have one hyperparameter in our grid, the total number of combinations is just the range of regularization strength values we want to test (This is why grid searches can get computationally expensive when there are mutltiple parameters). The grid search relies on [cross validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)#:~:text=Cross%2Dvalidation%20is%20a%20resampling,model%20will%20perform%20in%20practice.) to compare the resulting mean squared error at each combination.
-```python
-# Perform grid search with cross-validation (cv=5 indicates 5 iterations per combination)
-grid_search = GridSearchCV(lasso, param_grid, cv=5, scoring='neg_mean_squared_error')
-
-# Split data into train and validation sets (see cross validation link)
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Fit the grid search to data
-grid_search.fit(X_train, y_train)
-```
-
-## Identify Best Hyperparameter Value
-After the grid search is complete you can get the best performing value.
-```python
-# Get the best alpha value from the grid search
-best_alpha = grid_search.best_params_['alpha']
-print(best_alpha)
-```
-
-## Repeat at Same Order of Magnitude
-However, we only tested to find the ideal order of magnitude. We need to repeat the process around that order of magnitude to find the most optimal value. We can use Numpy's linspace function to generate a range of values around the identified order of magnitude.
-```python
-# Define new range and grid
-alpha_values = np.linspace(best_alpha-0.0005, best_alpha+0.0005, 7)
-param_grid = {'alpha': alpha_values}
-
-# Repeat grid search
-grid_search = GridSearchCV(lasso, param_grid, cv=5, scoring='neg_mean_squared_error')
-X_train, X_val, y_train, y_val = train_test_split(features[:len(y)], y, test_size=0.2, random_state=42)
-grid_search.fit(X_train, y_train)
-best_alpha = grid_search.best_params_['alpha']
-```
-
-## Create Optimized Model
-With the grid search complete, we now have an optimized lasso regression model that will appropriately perform feature selection for us without excluding important predictor variables or allowing too much noise into the model.
-```python
-best_lasso = Lasso(alpha=best_alpha)
-```
+## Ethical Considerations
+Games of Legends profits from subscriptions to analytical products and services that aid in making informed bets on games. I puposefully did not scrape a win/loss column for this reason. The scope of this data set and analysis is to examine playstyles between red and blue sides, not make predictions on outcomes, so I feel that the scraping is not unethical. Additionally, the robots.txt file does not disallow scraping from any of the pages visited.
 
 ## Conclusion
-Grid searches are a powerful tool to improve predictive performance of machine learning models. We can narrow down the optimal order of magnitude for the hyperparameters and then find their optimal values. It is also important to recognize the computational time limitations of grid searches that test too many combinations.
+I intended to get more data than I scraped, but I realized that the time constraints were more than I anticipated given the number of page redirects, pushed buttons, and fetched javascript graphs. Aside from this, the data set is complete and ready for analysis.
