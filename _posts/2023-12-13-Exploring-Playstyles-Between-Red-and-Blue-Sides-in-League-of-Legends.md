@@ -16,5 +16,24 @@ In [my last post](https://crowleyp5.github.io/crowleyp5blog/2023/11/17/Collectin
 |3|Worlds Main Event 2023|11/12/2023|31\.416666666666668|JD Gaming|T1|6|3|0|0|16|11|4|2|134|41|104|59|Red|10\.933333333333334|Blue|
 |4|Worlds Main Event 2023|11/11/2023|29\.366666666666667|Weibo Gaming|Bilibili Gaming|18|10|3|1|3|2|1|0|99|30|92|41|Red|8\.866666666666667|Blue|
 
+### Which characters are played more or banned more on both sides?
+image: /assets/images/.jpg
+
 ### Which side generates more gold from CS and Kills?
 In League of Legends, gold makes your character stronger. Accumulating gold efficiently it key to establishing an early lead and pushing your advantage to victory. Creep score (CS) and kills measure gold income, but income can also be earned from objectives. While this is an important aspect of the game, to in some ways represents a playstyle or win condition rather than a metric of winning or losing.
+
+image: /assets/images/CS_Diff_Roles.png
+
+image: /assets/images/Kill_Diff_Roles.png
+
+### Which objectives are taken more on both sides?
+
+image: /assets/images/Obj_Diff_Teams.png
+
+### How quickly are the first objectives taken on both sides?
+
+image: /assets/images/Objective_Times_Teams.png
+
+### Which side has an easier time establish vision control?
+
+image: /assets/images/Wards_Teams.png
