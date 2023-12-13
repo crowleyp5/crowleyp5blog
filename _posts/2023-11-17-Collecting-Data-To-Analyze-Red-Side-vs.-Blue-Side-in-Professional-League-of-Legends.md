@@ -13,11 +13,14 @@ image: /assets/images/red_blue.jpg
 
 ## Scraping the Data
   Data was scraped from the [Games of Legends](https://gol.gg/esports/home/) site, which posts game statistics from leagues around the world. Scraping the data took a considerable amount of time due to how frequently the scraper had to navigate to a new page, so I would not recommend scraping your own data set unless you have the passion and patience like I did. 
+  
   The format of this site is a table with 10 of the most recent professional sets of League of Legends. There is a back button to show the previous 10 sets that does not redirect to a new page. In the row corresponding to each set, there is a link that redirects us to a stats page where I scraped most of the info. Since this redirects to a new page with the game stats, it nagivates back to the home page, and it has to push the previous 10 button again to get back to the set being analyzed. Thus, it had to keep track of the back count. Each set has anywhere from 1 to 5 games depending on the tournament.
+  
   It is important to note that some games did not have the required stats for the scraper to find, so the program threw errors. At first, I tried to filter the offending tournaments out, but this was not feasible because of how many there were. If the program threw errors, I simply adjusted the back button count and started the program again.
 
 ## Cleaning the Data
   The data was fairly clean to begin with, but there were a few steps necessary to make the data usable. The program scraped duplicate games because of insufficient sleep times and inconsistent load times. It probably would have been more efficient to use expected condition statements instead of manually putting the program to sleep. 
+  
   After removing duplicate rows, there were 509 game observations in the data set. I converted the times that were formatted in minutes and seconds to just minutes with decimals, which simplified the units for numeric comparisons. I converted the date to datetime format. There were some extra commas in the KDA and CS column, which I removed. I then split the strings by commas in that column and in the picks and bans columns to create separate columns for each KDA, CS, pick, and ban. The KDA, CS, and picks were in order of roles of top, jungle, mid, bot, and support, so ther columns are labeled as such on each side. The bans are labeled from one to five on each side. The other columns were already formatted properly.
 
 ## Ethical Considerations
