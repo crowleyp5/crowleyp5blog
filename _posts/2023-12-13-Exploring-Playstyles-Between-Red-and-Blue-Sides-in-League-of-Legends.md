@@ -30,7 +30,7 @@ The other main source of income comes from objectives, which include turrets, dr
 
 We can see that the red side and blue side are able to secure similar numbers of barons and dragons, but the blue side is getting about a full turret more per game on average. One theory could be that the CS advantage for the blue team in the mid role gives their mid priority. If the mid role has priority, they can rotate to the dragon or baron before their red side counterpart. It can be hard to take down the mid turret due to its proximity to the other objectives, so blue may not necessarily have to trade the turret for the objective because of its mid priority, whereas red may have to make the trade if they struggle to get mid priority. If this is the case, this would stem from more pressure being exerted on mid by the blue side.
 
-<img src="/assets/images/DragondVsTurrets.png" alt="Dragons and Turrets">
+<img src="/assets/images/DragonsVsTurrets.png" alt="Dragons and Turrets">
 
 The hexbin plot reaffirms what the previous graph showed in regards to the blue side getting more turrets. However, it suggests that objective trades are not often being done with dragons and turrets. In most matches, the winning team tends to get more of both over the course of the game.
 
