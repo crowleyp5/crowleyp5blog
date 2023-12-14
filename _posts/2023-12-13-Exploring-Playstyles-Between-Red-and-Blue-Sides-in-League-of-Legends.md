@@ -2,8 +2,8 @@
 layout: post
 title:  "Exploring Playstyles Between Red and Blue Sides in League of Legends"
 author: Paul Crowley
-description: "Scraping and cleaning publicly available data for comparisons in playstyle across both sides."
-image: /assets/images/red_blue.jpg
+description: "Exploratory data analysis of playstyles on both sides."
+image: /assets/images/red_blue2.jpg
 ---
 
 ### Preface
