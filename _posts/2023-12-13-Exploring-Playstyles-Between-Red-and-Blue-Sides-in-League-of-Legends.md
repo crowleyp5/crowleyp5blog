@@ -11,9 +11,7 @@ In [my last post](https://crowleyp5.github.io/crowleyp5blog/2023/11/17/Collectin
 
 ### Which characters are played more on both sides?
 Each player must have a unique character, meaning that the same character cannot be used on most teams. Characters often differ in playstyles, so analyzing the most played characters on each side could reveal some insights about team playstyles. For example, some team compositions rely on long ranged abilities, while others rely on strong 5 on 5 team fighting potential. These are the 5 most played characters at each role for both sides:
-
-![Top 5 Champions Picked by Team](/assets/images/top_5_picks.png)
-
+![Top 5 Champions Picked by Team](assets/imagestop_5_picks.png)
 From this table, we can see that there are hardly any differences across both sides. This would indicate that both sides opt for a healthy balance of team compositions, choosing to mix up their approaches to each game. It caught my attention that Tristana is the fourth most played champion on the blue side, a character that is most known for her ability to quickly take turret objectives. This may be important to address later on. Although there appear to be some differences in the most played support characters, they generally serve the same purpose as a low-damage and hard-to-kill form of crowd control, meaning that they create offensive or defensive imbalances for the team rather than being a threat on their own. Given their similarity in playstles, I would say that the compositions across both sides tends to be the same.
 
 ### Which side generates more gold from CS and Kills?
