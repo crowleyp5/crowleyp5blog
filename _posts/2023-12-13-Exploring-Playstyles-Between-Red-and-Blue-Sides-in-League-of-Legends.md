@@ -11,7 +11,7 @@ image: /assets/images/red_blue2.jpg
         position: absolute;
         right: -100px;
         top: 0;
-        width: 50px;
+        width: 460px;
         height: auto;
     }
 </style>
