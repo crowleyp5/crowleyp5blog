@@ -11,7 +11,7 @@ image: /assets/images/red_blue2.jpg
         position: absolute;
         right: -100px;
         top: 0;
-        width: 460px;
+        width: 420px;
         height: auto;
     }
 </style>
@@ -71,7 +71,7 @@ First, we can see that the most common outcome is a trade where the red team get
 Wards are essential to game strategy because they provide vision on parts of the map players normally cannot see. Finding and destroying these wards is essential because they keep your opponent guessing as to the next moves. Therefore, the ability do sominate vision control can influence how a team plays. 
 
 <div class="margin-image">
-    <img src="/crowleyp5blog/assets/images/ward.png" alt="Ward" style="position: absolute; right: -100px; top: 6700px; height: auto;">
+    <img src="/crowleyp5blog/assets/images/ward.png" alt="Ward" style="position: absolute; right: -100px; top: 7000px; height: auto;">
 </div>
 
 Teams with good vision control could be more inclined to fight 5 on 5 or pursue objectives based on information wards provide. It allows a team to know or anticipate opponents' moves and react accordingly. Poor vision control results in failed trades and team fights. Let's compare the number of wards the opponent places with the number of wards the team destroys as a metric for quality vision control.
