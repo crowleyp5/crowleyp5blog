@@ -18,7 +18,7 @@ image: /assets/images/red_blue2.jpg
 In [my last post](https://crowleyp5.github.io/crowleyp5blog/2023/11/17/Collecting-Data-To-Analyze-Red-Side-vs.-Blue-Side-in-Professional-League-of-Legends.html), I talked about the process I went through to scrape a data set with information from professional league of legends games. Before we begin exploring the data, You may want to explore what the data looks like. The repository with the data and code for scraping and data analysis is [here](https://github.com/crowleyp5/red-blue-lol-analysis/tree/main).
 
 <div class="margin-image">
-    <img src="/crowleyp5blog/assets/images/map.png" alt="Map" style="position: absolute; right: -100px; top: 150px; height: auto;">
+    <img src="/crowleyp5blog/assets/images/map.png" alt="Map" style="position: absolute; right: -100px; top: 500px; height: auto;">
 </div>
 
 ### Which characters are played more on both sides?
@@ -37,19 +37,19 @@ From these graphs, we can see that players in the top role have a wide range but
 
 ### Which objectives are taken more on both sides?
 <div class="margin-image">
-    <img src="/crowleyp5blog/assets/images/turret.png" alt="Turret" style="position: absolute; right: -100px; top: 1000px; height: auto;">
+    <img src="/crowleyp5blog/assets/images/turret.png" alt="Turret" style="position: absolute; right: -100px; top: 2500px; height: auto;">
 </div>
 The other main source of income comes from objectives, which include turrets, dragons, rift heralds, and barons. Rift heralds are only available from minute 8 until minute 20 of the game, and the baron is available after minute 20. Pursuing an objective, especially during the early stages of the game, generally but not always results in a traded objective on the other side of the map. Simply put, a team that puts pressure on the top side tower or baron may not have the resources to prevent pressure on the bottom side tower or dragon, so the other team will counterattack. We can use the data to see of teams tend to prefer a certain side of the baron and dragon trade, and to see if both teams are able to take the same number of turrets.
 
 <div class="margin-image">
-    <img src="/crowleyp5blog/assets/images/dragon.jpg" alt="Dragon" style="position: absolute; right: -100px; top: 1600px; height: auto;">
+    <img src="/crowleyp5blog/assets/images/dragon.jpg" alt="Dragon" style="position: absolute; right: -100px; top: 3000px; height: auto;">
 </div>
 
 ![Objectives](/crowleyp5blog/assets/images/Obj_Diff_Teams.png)
 
 We can see that the red side and blue side are able to secure similar numbers of barons and dragons, but the blue side is getting about a full turret more per game on average. One theory could be that the CS advantage for the blue team in the mid role gives their mid priority. If the mid role has priority, they can rotate to the dragon or baron before their red side counterpart. It can be hard to take down the mid turret due to its proximity to the other objectives, so blue may not necessarily have to trade the turret for the objective because of its mid priority, whereas red may have to make the trade if they struggle to get mid priority. If this is the case, this would stem from more pressure being exerted on mid by the blue side.
 <div class="margin-image">
-    <img src="/crowleyp5blog/assets/images/rift.png" alt="Rift Herald" style="position: absolute; right: -100px; top: 2100px; height: auto;">
+    <img src="/crowleyp5blog/assets/images/rift.png" alt="Rift Herald" style="position: absolute; right: -100px; top: 4000px; height: auto;">
 </div>
 
 ![Dragons](/crowleyp5blog/assets/images/DragonsVsTurrets.png)
@@ -70,7 +70,7 @@ First, we can see that the most common outcome is a trade where the red team get
 Wards are essential to game strategy because they provide vision on parts of the map players normally cannot see. Finding and destroying these wards is essential because they keep your opponent guessing as to the next moves. Therefore, the ability do sominate vision control can influence how a team plays. 
 
 <div class="margin-image">
-    <img src="/crowleyp5blog/assets/images/ward.png" alt="Ward" style="position: absolute; right: -100px; top: 4000px; height: auto;">
+    <img src="/crowleyp5blog/assets/images/ward.png" alt="Ward" style="position: absolute; right: -100px; top: 6500px; height: auto;">
 </div>
 
 Teams with good vision control could be more inclined to fight 5 on 5 or pursue objectives based on information wards provide. It allows a team to know or anticipate opponents' moves and react accordingly. Poor vision control results in failed trades and team fights. Let's compare the number of wards the opponent places with the number of wards the team destroys as a metric for quality vision control.
