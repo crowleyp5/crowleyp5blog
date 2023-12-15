@@ -6,6 +6,14 @@ description: "Exploratory data analysis of playstyles on both sides."
 image: /assets/images/red_blue2.jpg
 ---
 
+<style>
+    .margin-image img {
+        position: absolute;
+        right: -100px;
+        top: 0;
+    }
+</style>
+
 ### Preface
 In [my last post](https://crowleyp5.github.io/crowleyp5blog/2023/11/17/Collecting-Data-To-Analyze-Red-Side-vs.-Blue-Side-in-Professional-League-of-Legends.html), I talked about the process I went through to scrape a data set with information from professional league of legends games. Before we begin exploring the data, You may want to explore what the data looks like. The repository with the data and code for scraping and data analysis is [here](https://github.com/crowleyp5/red-blue-lol-analysis/tree/main).
 
@@ -41,7 +49,7 @@ The other main source of income comes from objectives, which include turrets, dr
 
 We can see that the red side and blue side are able to secure similar numbers of barons and dragons, but the blue side is getting about a full turret more per game on average. One theory could be that the CS advantage for the blue team in the mid role gives their mid priority. If the mid role has priority, they can rotate to the dragon or baron before their red side counterpart. It can be hard to take down the mid turret due to its proximity to the other objectives, so blue may not necessarily have to trade the turret for the objective because of its mid priority, whereas red may have to make the trade if they struggle to get mid priority. If this is the case, this would stem from more pressure being exerted on mid by the blue side.
 <div class="margin-image">
-    ![Rift Herald](/crowleyp5blog/assets/images/rift.png)
+    <img src="/crowleyp5blog/assets/images/rift.png" alt="Rift Herald">
 </div>
 
 ![Dragons](/crowleyp5blog/assets/images/DragonsVsTurrets.png)
